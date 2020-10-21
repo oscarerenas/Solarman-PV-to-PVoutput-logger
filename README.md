@@ -39,7 +39,7 @@ optional arguments:
                         PVoutput system ID
 ```
 
-If you have a Weewx instance, you can include these parameters which will work for the "inverter" version of the script.
+If you have a Weewx instance, you can include these parameters which will work for the "inverter" version of the script:
 ``` bash
 ./SolarmanPV-to-PVoutput-inverter-data.py <AS ABOVE, THEN>
   --weewx_user WEEWX_DB_USER
