@@ -51,7 +51,7 @@ parser.add_argument("--pvo_system_id", help="PVoutput system ID", required=True)
 args = parser.parse_args()
 
 if args.debug:
-	print "debug turned on"
+	print("debug turned on")
 	debug = True
 
 client_id = args.smpv_client_id
@@ -64,7 +64,7 @@ pvo_system_id = args.pvo_system_id
 smpv = SolarmanPVAPI(client_id, client_secret, plant_id)
 smpv.setDebug(debug)
 if smpv.connected is not True:
-	print 'An issue with connection to the SolarmanPV API'
+	print('An issue with connection to the SolarmanPV API')
 	sys.exit(1)
 
 power_details = smpv.getPower(datetime.date.today().strftime("%Y-%m-%d"), True)
@@ -90,10 +90,10 @@ if power_details is not None:
 		else:
 			DEBUG('no need to update - power %dW' % power)
 	except:
-		print 'An error with PVoutput ', sys.exc_info()[0]
+		print('An error with PVoutput ', sys.exc_info()[0])
 		raise
 else:
-	print 'Invalid data from SolarmanPV API - no further action'
+	print('Invalid data from SolarmanPV API - no further action')
 
 # temporary exit, looking to include voltage and current data - but need to find out why the current day data doesn't come back through the API
 sys.exit(5)
@@ -117,21 +117,21 @@ for sm in smlist:
             Temperature = str(current['TKK'])
             Voltage = str(current['UL1'])
 
-            print "Date: " + str(powerdate) + " Time: " + str(
-                powerTime) + " W: " + PowerGeneration + " temp: " + Temperature + " volt: " + Voltage
+            print("Date: " + str(powerdate) + " Time: " + str(
+                powerTime) + " W: " + PowerGeneration + " temp: " + Temperature + " volt: " + Voltage)
 
             # update pvoutput
             if (PowerGeneration):  # make sure that we have actual values...
                 pvoutz.add_status(powerdate, powerTime, power_exp=PowerGeneration, temp=Temperature, vdc=Voltage)
-                print "Sucessful Log "
+                print("Sucessful Log ")
                 #Ensure API limits adhered to
                 time.sleep(apiDelay)
             else:
-                print "aint no data bitch.. make the sun come up"
+                print("aint no data bitch.. make the sun come up")
 
             count += 1
         except:
-            print 'Communication Error, WR %i' % no
+            print('Communication Error, WR %i' % no)
             continue
 #(status, errors) = sm.status(count)
 
@@ -143,8 +143,8 @@ for sm in smlist:
 #        pass
 
 if count < len(allinverters):
-    print 'Not all inverters queried (%i < %i)' % (count, len(allinverters))
+    print('Not all inverters queried (%i < %i)' % (count, len(allinverters)))
 
-print "Data Succesfully query and posted."
+print("Data Succesfully query and posted.")
 time.sleep(1)
 
