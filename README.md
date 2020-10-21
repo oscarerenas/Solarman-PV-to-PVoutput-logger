@@ -38,3 +38,12 @@ optional arguments:
   --pvo_system_id PVO_SYSTEM_ID
                         PVoutput system ID
 ```
+
+If you have a Weewx instance, you can include these parameters which will work for the "inverter" version of the script.
+``` bash
+./SolarmanPV-to-PVoutput-inverter-data.py <AS ABOVE, THEN>
+  --weewx_user WEEWX_DB_USER
+  --weewx_password WEEWX_DB_PASSWD
+  --weewx_host WEEWX_DB_HOST
+  --weewx_database WEEWX_DB_NAME
+```
