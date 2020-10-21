@@ -1,7 +1,18 @@
-import urllib
-import httplib
+# I think this would be better using the requests library - 20201021
 
-pvo_host= "pvoutput.org"
+# put in place for python2 vs python3 compatibility
+import six
+if six.PY2:
+	import urllib
+elif six.PY3:
+    import urllib.parse as urllib
+
+if six.PY2:
+	import httplib
+elif six.PY3:
+	import http.client as httplib
+
+pvo_host = "pvoutput.org"
 pvo_statusInterval = 5         # Your PVoutput status interval - normally 5, 10 (default) or 15
 
 
@@ -136,7 +147,7 @@ class PVoutput_Connection():
 		try:
 			response = conn.getresponse()
 		except httplib.BadStatusLine as e:
-			print '%s: request failed - %s' % (self.__class__.__name__, e)
+			print('%s: request failed - %s' % (self.__class__.__name__, e))
 			response = False
 
 		return response
